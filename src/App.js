@@ -18,10 +18,10 @@ class App extends Component {
 
   onChoiceButtonClick = (choice) => {
     if (choice === 'file'){
-      this.setState({choice: 'byFile'});
+      this.setState({choice: choice});
     }
     if (choice === 'text'){
-      this.setState({choice: 'byText'});
+      this.setState({choice: choice});
     }
   }
 
