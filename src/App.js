@@ -5,15 +5,15 @@ import Choice from './components/Choice';
 import ByFile from './components/ByFile';
 import ByText from './components/ByText';
 
-const initialState = {
-  choice: 'empty'
+const formInitialState = {
+  choice: 'empty',
 }
 
 class App extends Component {
   
   constructor() {
     super();
-    this.state = initialState;
+    this.state = formInitialState;
   }
 
   onChoiceButtonClick = (choice) => {
