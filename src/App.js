@@ -9,13 +9,6 @@ const formInitialState = {
   choice: 'empty',
 }
 
-const checkboxInitialState ={
-  iName: 'checked',
-  sku: 'checked',
-  gtin: 'checked',
-  link: 'checked'
-}
-
 class App extends Component {
   
   constructor() {

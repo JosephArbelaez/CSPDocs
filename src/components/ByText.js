@@ -6,7 +6,8 @@ class ByText extends React.Component{
             <div id = "text">
                 <form >
                     <textarea name = "textArea" form = "text"></textarea>
-                    </form>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         );
     }

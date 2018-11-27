@@ -1,7 +1,6 @@
 import React from 'react';
 
-class Header extends React.Component{
-    render(){
+const Header = () => {
         return (
             <div>
                 <h1>
@@ -10,14 +9,15 @@ class Header extends React.Component{
                 <h4>
                     {'The quickest way to generate an excel sheet based on an excel sheet!'}
                 </h4>
+                <input type="text" required="true" /> API Key
                 <form id = "attributes">
-                    <input type="checkbox" name="itemName" value="itemName" checked="true"/>Item Name
+                    <input type="checkbox" name="itemName" value="itemName" />Item Name
                     <input type="checkbox" name="sku" value="sku"/>SKU
                     <input type="checkbox" name="gtin" value="gtin"/>GTIN
-                    <input type="checkbox" name="link" value="link" checked="true"/>Link
+                    <input type="checkbox" name="link" value="link"/>Link
                 </form>
             </div>
         );
     }
-}
+
   export default Header;
