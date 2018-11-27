@@ -28,17 +28,15 @@ class App extends Component {
   render() {
     const { choice } = this.state;
     return (
-      <div>
+      <div className='tc pa4 br4 shadow-5' id= 'card'>
         <Header />
-        <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
+        <br />
         {
           choice === 'file' ?
             <ByFile /> :
             choice === 'text' ? 
               <ByText /> :
-              <p>
-                {'Please select either ByFile or By Text'}
-              </p>
+              <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
         }
       </div>
     );
