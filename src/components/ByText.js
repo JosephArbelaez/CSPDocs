@@ -36,5 +36,5 @@ class ByText extends React.Component {
                 </div>
             );
     }
-    }
+}
   export default ByText;
