@@ -1,6 +1,6 @@
 Next Steps:
     * Text
-        * Get text area to split numbers by commas into an array
+        * (Complete) Get text area to split numbers by commas into an array
         * Get the array to call the API using the individual numbers
         * Present that array as an excel sheet.
     * Excel Sheet
@@ -11,4 +11,5 @@ Next Steps:
         * Present the completed array as an excel sheet.
     * Be able to rechoose text or excel sheet button
     * Get rid of checkboxes
-    
+    * Fix the regexes
+

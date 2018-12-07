@@ -22,7 +22,7 @@ class ByText extends React.Component {
         }
     }
 
-    /* Whenever you call this array, make sure to .trim() it.*/
+    /* Whenever you call this array, make sure to .trim() idArray.*/
     onSubmit = () => {
         let ids = this.state.textInput;
         let idArray = ids.split(",");
