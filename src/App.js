@@ -6,7 +6,15 @@ import ByFile from './components/ByFile';
 import ByText from './components/ByText';
 
 const initialState = {
-  choice: 'empty'
+  choice: 'empty',
+  input: '',
+  item: {
+    itemId: '',
+    itemName: '',
+    sku: '',
+    gtin: '',
+    link: ''
+  }
 }
 
 class App extends Component {
@@ -25,6 +33,13 @@ class App extends Component {
     }
   }
 
+  onInputChange = (event) => {
+    this.setState({input: event.target.value});
+  }
+
+  // onTextButtonClick = () => {
+  //   let input = {this.input};
+  // }
   render() {
     const { choice } = this.state;
     return (
@@ -35,7 +50,7 @@ class App extends Component {
           choice === 'file' ?
             <ByFile /> :
             choice === 'text' ? 
-              <ByText /> :
+              <ByText onInputChange= {this.onInputChange} onTextButtonClick={this.onTextButtonClick}/> :
               <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
         }
       </div>
