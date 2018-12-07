@@ -12,9 +12,7 @@ class ByText extends React.Component {
 
     onTextChange = (event) => {
         const regex = /^[0-9\b]+$/;
-        const regex2 = /, /;
-        const regex3 = /,/;
-        if (event.target.value === '' || regex.test(event.target.value) || regex2.test(event.target.value) || regex3.test(event.target.value)) {
+        if (event.target.value === '' || regex.test(event.target.value)) {
             this.setState({textInput: event.target.value});
             document.getElementById("error").innerHTML = "";
             document.getElementById("submitButton").disabled = false;
@@ -24,6 +22,7 @@ class ByText extends React.Component {
         }
     }
 
+    /* Whenever you call this array, make sure to .trim() it.*/
     onSubmit = () => {
         let ids = this.state.textInput;
         let idArray = ids.split(",");
