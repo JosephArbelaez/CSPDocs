@@ -10,4 +10,5 @@ Next Steps:
         * Use VBA in order to create macros to check the excel sheet
         * Present the completed array as an excel sheet.
     * Be able to rechoose text or excel sheet button
-
+    * Get rid of checkboxes
+    
