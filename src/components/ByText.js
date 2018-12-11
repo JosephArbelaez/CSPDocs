@@ -1,12 +1,10 @@
 import React from 'react';
 
-// Use sign in as reference.
-
 class ByText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            textInput: ''
+            textInput: '',
         }
     }
 
@@ -24,18 +22,45 @@ class ByText extends React.Component {
 
     /* Whenever you call this array, make sure to .trim() idArray.*/
     onSubmit = () => {
+
         let ids = this.state.textInput;
         let idArray = ids.split(",");
-        console.log(idArray[0]);
+        let apiKey = this.props.apikey;
+        let itemIds = '';
         let matrix = [
             [idArray[0], 'SKU', 'GTIN', 'Link']
         ]
-        for (let i = 1; i < idArray.length; i++){
-            matrix.push([idArray[i].trim(), 'SKU', 'GTIN', 'Link']);
-        }
-        console.log(matrix)
-    }
 
+        // Removing whitespace in array
+        for (let i = 0; i < idArray.length; i++) {
+            idArray[i] = idArray[i].replace(/^\s\s*/, '').replace(/s\s\s*$/, '');
+        }
+
+        // Adding items to matrix to prep for excel sheet
+        for (let i = 1; i < idArray.length; i++){
+            matrix.push([idArray[i], 'SKU', 'GTIN', 'Link']);
+        }
+
+        // Prep itemId string for API call
+        for (let i = 0; i < idArray.length; i++){
+            itemIds = itemIds + idArray[i] + ',';
+        }
+
+        /*
+            MUST Change this in the future to send only 20 items at a time.
+        */
+        itemIds = itemIds.substr(0, itemIds.length - 1);
+
+        /*
+            Now going to create a node.js server so that I can create and utilize
+            any amount of requests.
+        */
+        fetch('http://api.walmartlabs.com/v1/items?ids='+ itemIds + '&apiKey=' + apiKey + '&lsPublisherId={Your LinkShare Publisher Id}&format=json&callback=foo')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+    }
 
     render() {
         return (
