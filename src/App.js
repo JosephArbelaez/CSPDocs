@@ -8,13 +8,7 @@ import ByText from './components/ByText';
 const initialState = {
   choice: 'empty',
   input: '',
-  item: {
-    itemId: '',
-    itemName: '',
-    sku: '',
-    gtin: '',
-    link: ''
-  }
+  apiKey: '',
 }
 
 class App extends Component {
@@ -31,26 +25,31 @@ class App extends Component {
     if (choice === 'text'){
       this.setState({choice: choice});
     }
+    console.log(this.state.apiKey);
   }
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
 
-  // onTextButtonClick = () => {
-  //   let input = {this.input};
-  // }
+  onApiChange = (event) => {
+    this.setState({apiKey: event.target.value});
+  }
+
   render() {
     const { choice } = this.state;
     return (
       <div className='tc pa4 br4 shadow-5' id= 'card'>
-        <Header />
+        <Header value = {this.state.apiKey} onApiChange = {this.onApiChange}/>
         <br />
         {
           choice === 'file' ?
             <ByFile /> :
             choice === 'text' ? 
-              <ByText onInputChange= {this.onInputChange} onTextButtonClick={this.onTextButtonClick}/> :
+              <ByText 
+                onInputChange= {this.onInputChange} 
+                onTextButtonClick={this.onTextButtonClick}
+                apikey={this.state.apiKey}/> :
               <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
         }
       </div>
