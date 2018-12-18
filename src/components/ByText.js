@@ -1,5 +1,5 @@
 import React from 'react';
-
+const axios = require('axios');
 class ByText extends React.Component {
     constructor(props) {
         super(props);
@@ -50,16 +50,17 @@ class ByText extends React.Component {
             MUST Change this in the future to send only 20 items at a time.
         */
         itemIds = itemIds.substr(0, itemIds.length - 1);
-
+        let walmartURL = `http://api.walmartlabs.com/v1/items?ids=${itemIds}&apiKey=${apiKey}&format=json`;
         /*
             Now going to create a node.js server so that I can create and utilize
             any amount of requests.
         */
-        fetch('http://api.walmartlabs.com/v1/items?ids='+ itemIds + '&apiKey=' + apiKey + '&lsPublisherId={Your LinkShare Publisher Id}&format=json&callback=foo')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
+
+        // fetch()
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
     }
 
     render() {
