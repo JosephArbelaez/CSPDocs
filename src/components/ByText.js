@@ -1,10 +1,14 @@
 import React from 'react';
-const axios = require('axios');
+import axios from 'axios';
+import ReactDOM from 'react-dom';
+import { CSVLink, CSVDownload } from "react-csv";
+
 class ByText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             textInput: '',
+            submit: 'false'
         }
     }
 
@@ -22,23 +26,23 @@ class ByText extends React.Component {
 
     /* Whenever you call this array, make sure to .trim() idArray.*/
     onSubmit = () => {
-
         let ids = this.state.textInput;
         let idArray = ids.split(",");
         let apiKey = this.props.apikey;
         let itemIds = '';
-        let matrix = [
-            [idArray[0], 'SKU', 'GTIN', 'Link']
-        ]
+        let matrix = [[idArray[0]]];
+        let data =[
+            ["ITEM ID", "UPC", "NAME", "LINK"]
+        ];
 
         // Removing whitespace in array
         for (let i = 0; i < idArray.length; i++) {
             idArray[i] = idArray[i].replace(/^\s\s*/, '').replace(/s\s\s*$/, '');
         }
 
-        // Adding items to matrix to prep for excel sheet
+        // Adding items to matrix to prep for API Call
         for (let i = 1; i < idArray.length; i++){
-            matrix.push([idArray[i], 'SKU', 'GTIN', 'Link']);
+            matrix.push(idArray[i]);
         }
 
         // Prep itemId string for API call
@@ -50,17 +54,24 @@ class ByText extends React.Component {
             MUST Change this in the future to send only 20 items at a time.
         */
         itemIds = itemIds.substr(0, itemIds.length - 1);
-        let walmartURL = `http://api.walmartlabs.com/v1/items?ids=${itemIds}&apiKey=${apiKey}&format=json`;
-        /*
-            Now going to create a node.js server so that I can create and utilize
-            any amount of requests.
-        */
+        let walmartURL = `https://cors-anywhere.herokuapp.com/http://api.walmartlabs.com/v1/items?ids=${itemIds}&apiKey=${apiKey}&format=json`;
 
-        // fetch()
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log(data);
-        // })
+        axios.get(walmartURL).then((res) => {
+            for (let i = 0; i < res.data.items.length; i++){
+                let item = [res.data.items[i].itemId,
+                `${res.data.items[i].upc}`, 
+                res.data.items[i].name, 
+                `https://www.walmart.com/ip/${res.data.items[i].itemId}`]
+
+                data.push(item);
+            }  
+
+            // This is what causes the spreadsheet to appear
+            ReactDOM.render(<CSVDownload data={data} target="_blank" /> , document.getElementById('error'));
+
+            // Transforms the DOM back to blank so that if you click submit again it'll generate a new Spreadsheet.
+            ReactDOM.render(<div></div>, document.getElementById('error'));
+        })
     }
 
     render() {
@@ -78,9 +89,9 @@ class ByText extends React.Component {
                         }} 
                         input={this.state.textInput}/>
                 </form>
-                <input id="submitButton" type="submit" onClick= {this.onSubmit}></input>
+                <button id="newButton" title="Refresh" type="submit" onClick= {this.onNew}>Refresh</button>
                 <div id="error"></div>
-                </div>
+            </div>
             );
     }
 }
