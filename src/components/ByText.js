@@ -56,16 +56,18 @@ class ByText extends React.Component {
         itemIds = itemIds.substr(0, itemIds.length - 1);
         let walmartURL = `https://cors-anywhere.herokuapp.com/http://api.walmartlabs.com/v1/items?ids=${itemIds}&apiKey=${apiKey}&format=json`;
 
+        
         axios.get(walmartURL).then((res) => {
             for (let i = 0; i < res.data.items.length; i++){
                 let item = [res.data.items[i].itemId,
-                `${res.data.items[i].upc}`, 
+                `UPC: ${res.data.items[i].upc}`, 
                 res.data.items[i].name, 
                 `https://www.walmart.com/ip/${res.data.items[i].itemId}`]
 
                 data.push(item);
             }  
 
+            console.log(res);
             // This is what causes the spreadsheet to appear
             ReactDOM.render(<CSVDownload data={data} target="_blank" /> , document.getElementById('error'));
 
@@ -89,7 +91,7 @@ class ByText extends React.Component {
                         }} 
                         input={this.state.textInput}/>
                 </form>
-                <button id="newButton" title="Refresh" type="submit" onClick= {this.onNew}>Refresh</button>
+                <input id="submitButton" type="submit" onClick= {this.onSubmit}></input>
                 <div id="error"></div>
             </div>
             );
