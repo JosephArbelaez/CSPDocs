@@ -68,6 +68,7 @@ class ByFile extends React.Component{
         };
         return (
             <div id='dropzone'>
+                <a href="https://s3.amazonaws.com/joewalmart/walmart/ItemID+Template.xlsx"> ItemGrabber Template</a>
                 <Dropzone onDrop={this.onDrop}>
                 {({ getRootProps, getInputProps, isDragActive, isDragReject}) => {
                         let styles = {...baseStyle};
