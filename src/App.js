@@ -25,7 +25,6 @@ class App extends Component {
     if (choice === 'text'){
       this.setState({choice: choice});
     }
-    console.log(this.state.apiKey);
   }
 
   onInputChange = (event) => {

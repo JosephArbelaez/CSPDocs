@@ -9,6 +9,7 @@ class ByFile extends React.Component{
                     .xlsm,
                     .xlsx,
                     .txt,
+                    .csv,
                     vnd.ms-excel,
                     vnd.ms-excel.addin.macroEnabled.12,
                     vnd.ms-excel.sheet.binary.macroEnabled.12,
