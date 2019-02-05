@@ -38,3 +38,7 @@ body {
 #card {
   background: white;
 }
+
+.dropzone {
+  align-content: center;
+}

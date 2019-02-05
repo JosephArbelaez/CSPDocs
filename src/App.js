@@ -43,7 +43,7 @@ class App extends Component {
         <br />
         {
           choice === 'file' ?
-            <ByFile /> :
+            <ByFile apikey={this.state.apiKey}/> :
             choice === 'text' ? 
               <ByText 
                 onInputChange= {this.onInputChange} 

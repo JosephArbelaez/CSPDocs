@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVDownload } from "react-csv";
 
 class ByText extends React.Component {
     constructor(props) {
@@ -56,7 +56,6 @@ class ByText extends React.Component {
         itemIds = itemIds.substr(0, itemIds.length - 1);
         let walmartURL = `https://cors-anywhere.herokuapp.com/http://api.walmartlabs.com/v1/items?ids=${itemIds}&apiKey=${apiKey}&format=json`;
 
-        
         axios.get(walmartURL).then((res) => {
             for (let i = 0; i < res.data.items.length; i++){
                 let item = [res.data.items[i].itemId,
@@ -67,7 +66,6 @@ class ByText extends React.Component {
                 data.push(item);
             }  
 
-            console.log(res);
             // This is what causes the spreadsheet to appear
             ReactDOM.render(<CSVDownload data={data} target="_blank" /> , document.getElementById('error'));
 
