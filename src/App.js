@@ -45,11 +45,11 @@ class App extends Component {
           choice === 'file' ?
             <ByFile apikey={this.state.apiKey}/> :
             choice === 'text' ? 
-              <ByText 
+              <ByText id="button"
                 onInputChange= {this.onInputChange} 
                 onTextButtonClick={this.onTextButtonClick}
                 apikey={this.state.apiKey}/> :
-              <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
+              <Choice id="button" onChoiceButtonClick={this.onChoiceButtonClick}/>
         }
       </div>
     );

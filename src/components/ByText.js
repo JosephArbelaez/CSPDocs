@@ -71,12 +71,20 @@ class ByText extends React.Component {
 
             // Transforms the DOM back to blank so that if you click submit again it'll generate a new Spreadsheet.
             ReactDOM.render(<div></div>, document.getElementById('error'));
+        }).catch((err) => {
+            if (err.response.status === 403){
+                ReactDOM.render(<div><h3>Please enter an API key</h3></div>, document.getElementById('error'));
+            }
+            if (err.response.status >= 500){
+                ReactDOM.render(<div><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
+            }
         })
     }
 
     render() {
         return (
             <div id = "text">
+            <div id = "error" ></div>
                 <form >
                     <textarea 
                     id="textArea" 
@@ -90,7 +98,7 @@ class ByText extends React.Component {
                         input={this.state.textInput}/>
                 </form>
                 <input id="submitButton" type="submit" onClick= {this.onSubmit}></input>
-                <div id="error"></div>
+                
             </div>
             );
     }

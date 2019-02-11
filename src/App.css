@@ -37,8 +37,30 @@ body {
 
 #card {
   background: white;
+  width: 60%;
+  margin: auto;
+  margin-top: 5%;
 }
 
-.dropzone {
-  align-content: center;
+#dropzone {
+  align-items: center;
+  margin: auto;
+}
+
+#error{
+  color: black;
+  background-color: rgba(255, 0, 0, 0.37);
+  text-align: center;
+  width: 20%;
+  margin: auto;
+  border-radius: 15%;
+}
+
+#header {
+  text-align: center;
+}
+
+#button {
+  width: 100px;
+  border-radius: 25%;
 }
