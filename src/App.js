@@ -41,15 +41,16 @@ class App extends Component {
       <div className='tc pa4 br4 shadow-5' id= 'card'>
         <Header value = {this.state.apiKey} onApiChange = {this.onApiChange}/>
         <br />
+        <Choice onChoiceButtonClick={this.onChoiceButtonClick}/>
         {
           choice === 'file' ?
             <ByFile apikey={this.state.apiKey}/> :
             choice === 'text' ? 
-              <ByText id="button"
+              <ByText 
                 onInputChange= {this.onInputChange} 
                 onTextButtonClick={this.onTextButtonClick}
                 apikey={this.state.apiKey}/> :
-              <Choice id="button" onChoiceButtonClick={this.onChoiceButtonClick}/>
+              <div></div>
         }
       </div>
     );
