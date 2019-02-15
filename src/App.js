@@ -4,6 +4,7 @@ import './App.css';
 import Choice from './components/Choice';
 import ByFile from './components/ByFile';
 import ByText from './components/ByText';
+import SkuCompare from './components/SkuCompare'
 
 const initialState = {
   choice: 'empty',
@@ -23,6 +24,9 @@ class App extends Component {
       this.setState({choice: choice});
     }
     if (choice === 'text'){
+      this.setState({choice: choice});
+    }
+    if (choice === 'skuCompare'){
       this.setState({choice: choice});
     }
   }
@@ -50,6 +54,8 @@ class App extends Component {
                 onInputChange= {this.onInputChange} 
                 onTextButtonClick={this.onTextButtonClick}
                 apikey={this.state.apiKey}/> :
+                choice === 'skuCompare' ?
+                <SkuCompare></SkuCompare> :
               <div></div>
         }
       </div>
