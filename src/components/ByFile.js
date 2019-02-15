@@ -5,7 +5,6 @@ import readXlsxFile from 'read-excel-file'
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { CSVDownload } from "react-csv";
-import { request } from 'https';
 
 class ByFile extends React.Component{
 
@@ -16,6 +15,8 @@ class ByFile extends React.Component{
             ["ITEM ID", "UPC", "NAME", "LINK"]
         ];
         let apiKey = this.props.apikey;
+
+        ReactDOM.render(<div className="f6 link dim ph3 dib black bg-light-blue" ><h3>Fetching Data...</h3></div>, document.getElementById('error'));
 
         readXlsxFile(acceptedFiles[0]).then((rows) => {
             for (let i = 1; i < rows.length; i++){
@@ -46,10 +47,10 @@ class ByFile extends React.Component{
                     }
         }).catch((err) => {
                 if (err.response.status === 403){
-                    ReactDOM.render(<div><h3>Please enter an API key</h3></div>, document.getElementById('error'));
+                    ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>Please enter an API key</h3></div>, document.getElementById('error'));
                 }
                 if (err.response.status >= 500){
-                    ReactDOM.render(<div><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
+                    ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
                 }
             })
         })
@@ -80,7 +81,9 @@ class ByFile extends React.Component{
         };
         return (
             <div id='dropzone'>
+                <br />
                 <a href="https://s3.amazonaws.com/joewalmart/walmart/ItemID+Template.xlsx"> ItemGrabber Template</a>
+                <br />
                 <div id="error"></div>
                 <br />
                 <div id="dropzone">

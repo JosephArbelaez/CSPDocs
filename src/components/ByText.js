@@ -73,10 +73,10 @@ class ByText extends React.Component {
             ReactDOM.render(<div></div>, document.getElementById('error'));
         }).catch((err) => {
             if (err.response.status === 403){
-                ReactDOM.render(<div><h3>Please enter an API key</h3></div>, document.getElementById('error'));
+                ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>Please enter an API key</h3></div>, document.getElementById('error'));
             }
             if (err.response.status >= 500){
-                ReactDOM.render(<div><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
+                ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
             }
         })
     }
@@ -84,7 +84,8 @@ class ByText extends React.Component {
     render() {
         return (
             <div id = "text">
-            <div id = "error" ></div>
+                <div id = "error" ></div>
+                <br />
                 <form >
                     <textarea 
                     id="textArea" 
@@ -98,7 +99,6 @@ class ByText extends React.Component {
                         input={this.state.textInput}/>
                 </form>
                 <input id="submitButton" type="submit" onClick= {this.onSubmit}></input>
-                
             </div>
             );
     }

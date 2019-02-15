@@ -14,7 +14,7 @@ class Header extends React.Component{
                     value= {this.props.apikey} 
                     onChange = {this.props.onApiChange}
                     id='header'
-                /> API KEY
+                />: API KEY
                 <br/>
                 <br/>
             </div>
