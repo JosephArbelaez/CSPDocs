@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 import readXlsxFile from 'read-excel-file';
 import CSVReader from 'react-csv-reader';
-import CSVDownload from  "react-csv";
+import { CSVDownload } from  "react-csv";
 
 const itemReportArray = [];
 const skuTemplate = [];
