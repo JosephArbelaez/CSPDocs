@@ -4,17 +4,17 @@ import ReactDOM from 'react-dom';
 import { CSVDownload } from "react-csv";
 
 class ByText extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             textInput: '',
-            submit: 'false'
         }
     }
 
     onTextChange = (event) => {
         const regex = /^[0-9\b]+$/;
-        if (this.state.textInput === '' || regex.test(this.state.textInputr)) {
+        if (this.state.textInput === '' || regex.test(this.state.textInput)) {
             this.setState({textInput: event.target.value});
             document.getElementById("error").innerHTML = "";
             document.getElementById("submitButton").disabled = false;
@@ -26,11 +26,10 @@ class ByText extends React.Component {
 
     /* Whenever you call this array, make sure to .trim() idArray.*/
     onSubmit = () => {
-        let ids = this.state.textInput;
-        let idArray = ids.split(",");
+        let idArray = this.state.textInput.split(",")
         let apiKey = this.props.apikey;
         let itemIds = '';
-        let matrix = [[idArray[0]]];
+        let matrix = [idArray[0]];
         let data =[
             ["ITEM ID", "UPC", "NAME", "LINK"]
         ];
@@ -73,10 +72,18 @@ class ByText extends React.Component {
             ReactDOM.render(<div></div>, document.getElementById('error'));
         }).catch((err) => {
             if (err.response.status === 403){
-                ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>Please enter an API key</h3></div>, document.getElementById('error'));
+                ReactDOM.render(
+                    <div className="f6 link ph3 dib black bg-red">
+                        <h3>Please enter an API key</h3>
+                    </div>, document.getElementById('error')
+                );
             }
             if (err.response.status >= 500){
-                ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
+                ReactDOM.render(
+                    <div className="f6 link ph3 dib black bg-red">
+                        <h3>There is an issue with WalmartLabs API Server, please try again later</h3>
+                    </div>, document.getElementById('error')
+                );
             }
         })
     }
@@ -85,6 +92,13 @@ class ByText extends React.Component {
         return (
             <div id = "text">
                 <div id = "error" ></div>
+                <input 
+                    value= {this.props.apikey} 
+                    onChange = {this.props.onApiChange}
+                    id='header'
+                    placeholder="API KEY"
+                />
+                <br />
                 <br />
                 <form >
                     <textarea 
@@ -100,7 +114,8 @@ class ByText extends React.Component {
                 </form>
                 <input id="submitButton" type="submit" onClick= {this.onSubmit}></input>
             </div>
-            );
+        );
     }
 }
-  export default ByText;
+
+export default ByText;

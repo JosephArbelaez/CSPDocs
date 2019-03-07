@@ -15,8 +15,11 @@ class ByFile extends React.Component{
             ["ITEM ID", "UPC", "NAME", "LINK"]
         ];
         let apiKey = this.props.apikey;
-
-        ReactDOM.render(<div className="f6 link dim ph3 dib black bg-light-blue" ><h3>Fetching Data...</h3></div>, document.getElementById('error'));
+        ReactDOM.render(
+            <div className="f6 link dim ph3 dib black bg-light-blue" >
+                <h3>Fetching Data...</h3>
+            </div>, document.getElementById('error')
+        );
 
         readXlsxFile(acceptedFiles[0]).then((rows) => {
             for (let i = 1; i < rows.length; i++){
@@ -38,19 +41,27 @@ class ByFile extends React.Component{
             
                             data.push(item);
                         }
-    
                         // This is what causes the spreadsheet to appear
-                        ReactDOM.render(<CSVDownload data={data} target="_blank" /> , document.getElementById('error'));
-        
+                        ReactDOM.render(
+                            <CSVDownload data={data} target="_blank" /> 
+                            , document.getElementById('error')
+                        );
                         // Transforms the DOM back to blank so that if you click submit again it'll generate a new Spreadsheet.
                         ReactDOM.render(<div></div>, document.getElementById('error'));
                     }
         }).catch((err) => {
                 if (err.response.status === 403){
-                    ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>Please enter an API key</h3></div>, document.getElementById('error'));
+                    ReactDOM.render(
+                        <div className="f6 link ph3 dib black bg-red">
+                            <h3>Please enter an API key</h3>
+                        </div>, document.getElementById('error'));
                 }
                 if (err.response.status >= 500){
-                    ReactDOM.render(<div className="f6 link ph3 dib black bg-red"><h3>There is an issue with WalmartLabs API Server, please try again later</h3></div>, document.getElementById('error'));
+                    ReactDOM.render(
+                        <div className="f6 link ph3 dib black bg-red">
+                            <h3>There is an issue with WalmartLabs API Server, please try again later</h3>
+                        </div>, document.getElementById('error')
+                    );
                 }
             })
         })
@@ -81,12 +92,17 @@ class ByFile extends React.Component{
         };
         return (
             <div id='dropzone'>
+                <input 
+                    value= {this.props.apikey} 
+                    onChange = {this.props.onApiChange}
+                    id='header'
+                    placeholder="API KEY"
+                />
                 <br />
                 <a href="https://s3.amazonaws.com/joewalmart/walmart/ItemID+Template.xlsx"> ItemGrabber Template</a>
                 <br />
                 <div id="error"></div>
                 <br />
-                <div id="dropzone">
                     <Dropzone onDrop={this.onDrop}>
                     {({ getRootProps, getInputProps, isDragActive, isDragReject}) => {
                             let styles = {...baseStyle};
@@ -109,8 +125,6 @@ class ByFile extends React.Component{
                         }}
                     </Dropzone>
                 </div>
-            </div>
-            
         );
     }
 }
